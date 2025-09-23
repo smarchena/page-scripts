@@ -8,7 +8,7 @@ F1::
     Click 2
     
     ; Escribir el valor
-    Send, 950000
+    Send, 500000
     
 return
 #IfWinActive
@@ -16,7 +16,7 @@ return
 ; --- Si está en Edge ---
 #IfWinActive ahk_exe msedge.exe
 F1::
-    SendInput, 950000
+    SendInput, 500000
 return
 #IfWinActive
 

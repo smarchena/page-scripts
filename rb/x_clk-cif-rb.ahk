@@ -13,7 +13,7 @@ RButton::
         MouseMove, 931, 751 ; Coordenadas X=931, Y=751
         Click 2              ; Hace clic en esa posición
         Sleep, 100
-        Send, 950000        ; Escribe la cifra
+        Send, 500000        ; Escribe la cifra
     }
 return
 
