@@ -1,13 +1,13 @@
 #IfWinActive ahk_exe chrome.exe
 F1::    
-    Send, 927000
+    Send, 860000
 return
 
 #IfWinActive
 ; --- Si está en Edge ---
 #IfWinActive ahk_exe msedge.exe
 F1::
-    Send, 927000
+    Send, 860000
 return
 #IfWinActive
 

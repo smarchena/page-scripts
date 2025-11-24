@@ -1,4 +1,4 @@
-#IfWinActive ahk_exe chrome.exe
+#IfWinActive ahk_exe brave.exe
 F1::    
     Send, 720000
 return
