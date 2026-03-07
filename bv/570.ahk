@@ -1,13 +1,13 @@
 #IfWinActive ahk_exe brave.exe
 F1::    
-    Send, 569000
+    Send, 570000
 return
 
 #IfWinActive
 ; --- Si está en Edge ---
 #IfWinActive ahk_exe msedge.exe
 F1::
-    Send, 569000
+    Send, 570000
 return
 #IfWinActive
 

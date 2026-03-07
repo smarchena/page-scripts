@@ -1,5 +1,5 @@
 #IfWinActive ahk_exe brave.exe
-Esc::Click 833, 824
+Esc::Click 853, 999
 return
 
 #IfWinActive

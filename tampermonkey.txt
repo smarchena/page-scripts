@@ -1,0 +1,167 @@
+// ==UserScript==
+// @name         BetPlay Modo Profesional Ultra Ligero
+// @namespace    pro.betplay
+// @version      2.0
+// @description  BetPlay minimalista para apostadores
+// @match        ://*betplay.com.co/*
+// @run-at       document-idle
+// @grant        none
+// ==/UserScript==
+
+(function() {
+'use strict';
+
+function limpiar(){
+
+// eliminar videos
+document.querySelectorAll("video").forEach(e=>e.remove());
+
+// eliminar banners
+document.querySelectorAll('[class*="banner"]').forEach(e=>e.remove());
+
+// eliminar sliders
+document.querySelectorAll('[class*="slider"]').forEach(e=>e.remove());
+
+// eliminar promociones
+document.querySelectorAll('[class*="promo"]').forEach(e=>e.remove());
+
+// eliminar publicidad
+document.querySelectorAll('[class*="advert"]').forEach(e=>e.remove());
+
+// eliminar modales
+document.querySelectorAll('[class*="modal"]').forEach(e=>e.remove());
+
+// eliminar canvas
+ //document.querySelectorAll('canvas').forEach(e=>e.remove());
+
+// permitir canvas dentro de partidos pero bloquear otros
+document.querySelectorAll("canvas").forEach(c => {
+
+let contenedor = c.closest('[class*="match"],[class*="game"],[class*="event"]');
+
+if(!contenedor){
+c.remove();
+}
+
+});
+
+// desactivar animaciones
+let css = document.createElement("style");
+
+css.innerHTML = `
+*{
+animation:none !important;
+transition:none !important;
+}
+
+iframe{
+display:none !important;
+}
+
+header{
+max-height:60px !important;
+}
+
+`;
+
+document.head.appendChild(css);
+
+}
+
+// ejecutar constantemente porque BetPlay recarga componentes
+setInterval(limpiar,1500);
+
+})();
+
+// bloquear conexiones websocket pesadas
+const OriginalWebSocket = window.WebSocket;
+
+window.WebSocket = function(url, protocols) {
+
+ if(url.includes("promo") || url.includes("banner") || url.includes("tracking")){
+console.log("WebSocket bloqueado:", url);
+return {};
+}
+
+console.log("WebSocket detectado:", url);
+
+// solo bloquear marketing muy evidente
+if(
+url.includes("ads") ||
+url.includes("analytics") ||
+url.includes("marketing")
+){
+console.log("WebSocket bloqueado:", url);
+return {};
+}
+return new OriginalWebSocket(url, protocols);
+};
+
+// bloquear scripts pesados
+const bloquear = [
+"analytics",
+"tracking",
+"hotjar",
+"ads",
+"promo",
+"marketing"
+];
+
+const observer = new MutationObserver((mutations)=>{
+
+mutations.forEach(m => {
+
+m.addedNodes.forEach(node => {
+
+if(node.tagName === "SCRIPT"){
+
+let src = node.src || "";
+
+if(bloquear.some(b => src.includes(b))){
+node.remove();
+console.log("script bloqueado:", src);
+}
+
+}
+
+});
+
+});
+
+});
+
+observer.observe(document.documentElement,{childList:true,subtree:true});
+
+// ultraminimalista
+
+let ultra = document.createElement("style");
+
+ultra.innerHTML = `
+
+/* eliminar secciones pesadas */
+aside,
+footer,
+nav,
+/* header{
+display:none !important;
+} */
+
+/* eliminar imágenes */
+img{
+display:none !important;
+}
+
+/* compactar página */
+body{
+zoom:90%;
+}
+
+/* eliminar animaciones */
+*{
+animation:none !important;
+transition:none !important;
+}
+
+`;
+
+document.head.appendChild(ultra)
