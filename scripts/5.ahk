@@ -3,6 +3,11 @@ F5::
     Send, 2000000    
 return
 
+#IfWinActive ahk_exe brave.exe
+F5::    
+    Send, 2000000    
+return
+
 #IfWinActive
 ; --- Si está en Edge ---
 #IfWinActive ahk_exe msedge.exe
