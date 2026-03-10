@@ -8,6 +8,7 @@ start "" "C:\Users\PERSONAL\Desktop\santy\page-scripts\scripts\4.ahk"
 start "" "C:\Users\PERSONAL\Desktop\santy\page-scripts\scripts\5.ahk"
 start "" "C:\Users\PERSONAL\Desktop\santy\page-scripts\scripts\copy.ahk"
 start "" "C:\Users\PERSONAL\Desktop\santy\page-scripts\scripts\into.ahk"
+start "" "C:\Users\PERSONAL\Desktop\santy\page-scripts\scripts\rafaga.ahk"
 
 echo Todos los scripts están activos.
 pause
